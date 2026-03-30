@@ -25,16 +25,11 @@ router.get("/posts/:id", (req, res) => {
     // 이렇게 가져온 저 "id"라는 값은
     // req.params.id 안에 있음   -> 이건 주소에서 가져온 값이라 string
     const targetId = Number(req.params.id);
-    // 1. 숫자값이 들어왔으면 정상적으로 형변환
-    // 2. 문자값이 들어왔으면 NaN이 targetId에 저장되겠네?
 
     // targetId를 가지고, mockPosts에서 해당하는 글(객체)를 찾아서 빈박스에 넣어야 함
     const result = mockPosts.find((value) => {
-        // 첫 순회 : value = { id: 8, title: "...", content: "..." }
-        // 2 순회 : value = { id: 3, title: "...", content: "..." }
-        // 3 순회 : value = { id: 5, title: "...", content: "..." }
         return value.id === targetId;
-    });         // 일치하는게 있으면 그 value가 반환되고, 없으면 undefined
+    });
 
     if (!result) {
         return res.status(404).json({ message: "Posts not found."})    // 에러. 404 not found
